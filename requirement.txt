@@ -1,0 +1,9 @@
+openai
+supabase
+pillow
+pandas
+langfuse
+aiohttp
+azure-cognitiveservices-speech
+python-dotenv
+google-genai

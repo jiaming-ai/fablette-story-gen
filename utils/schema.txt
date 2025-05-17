@@ -1,0 +1,55 @@
+
+CREATE TYPE language_enum AS ENUM (
+    'English',
+    'Chinese Simplified',
+    'Chinese Traditional',
+    'Spanish',
+    'French',
+    'Portuguese',
+    'Indonesian',
+    'German',
+    'Japanese'
+);
+
+CREATE TABLE public.story (
+    id uuid NOT NULL PRIMARY KEY,
+    author_id uuid,
+    created_on timestamp without time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    view_count integer NULL DEFAULT 0,
+    save_count integer NULL DEFAULT 0,
+    age integer NULL,
+    level character varying(50) NULL,
+    cover_img text NULL,
+    CONSTRAINT story_author_id_fkey1 FOREIGN KEY (author_id) REFERENCES users(id)
+);
+
+CREATE TABLE public.story_translation (
+    slid uuid NULL,
+    title character varying(255) NULL,
+    text json NULL,
+    description text NULL,
+    tags text[] NULL,
+    audio text NULL,
+    lang language_enum NOT NULL,
+    CONSTRAINT story_translation_pkey PRIMARY KEY (lang, slid),
+    CONSTRAINT story_translation_sid_fkey FOREIGN KEY (slid) REFERENCES story(id)
+);
+
+CREATE TABLE public.story_list (
+    id uuid NOT NULL PRIMARY KEY DEFAULT gen_random_uuid(),
+    cover text,
+    created_on timestamp without time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    view_count integer NOT NULL DEFAULT 0,
+    save_count integer NOT NULL DEFAULT 0,
+    like_count integer NOT NULL DEFAULT 0,
+    story_ids uuid[] NOT NULL DEFAULT '{}'
+);
+
+CREATE TABLE public.story_list_translation (
+    slid uuid NOT NULL,
+    lang language_enum NOT NULL,
+    name text,
+    text json,
+    CONSTRAINT story_list_translation_pkey PRIMARY KEY (slid, lang),
+    CONSTRAINT story_list_translation_slid_fkey FOREIGN KEY (slid) REFERENCES public.story_list(id)
+);
