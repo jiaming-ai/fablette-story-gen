@@ -23,27 +23,23 @@ pip install -r requirements.txt
 ### 3. Run audio generation AI
 Download the code by run the command
 ```
-git clone https://github.com/jiaming-ai/fab-tts-py.git
+git clone https://github.com/jiaming-ai/fablette-story-gen.git
 ```
 
-You can also go to https://github.com/jiaming-ai/fab-tts-py and download the code directly as a zip file. Then unzip it.
+You can also go to https://github.com/jiaming-ai/fablette-story-gen and download the code directly as a zip file. Then unzip it.
 
 Note:
 Put the music files in data foler as shown below
 
 the structure is like
 -root
- - fab_audio/
+ - generated_stories
  - data/
-  - bg_music/
-  - misc/
-  - sfx/
- - generated_stories/
- - main.py
+ - new_story_gemini.py
  - ...
 
 
-The following argument can be specified when running main.py:
+The following argument can be specified when running new_story_gemini.py
 - --target_langs to specify the language for translations. By default, it generate stories for English, Chinese, French and German. You can add more by specifing using this argument: --target_langs Chinese French German Japanese Spanish... English is always included so no need to add in the list.
 - --titles_csv to specify the titles. See notes below.
 - --age to specify the age for each stories. By default it's 5 years old.
