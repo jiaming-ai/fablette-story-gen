@@ -7,3 +7,4 @@ aiohttp
 azure-cognitiveservices-speech
 python-dotenv
 google-genai
+google-generativeai
